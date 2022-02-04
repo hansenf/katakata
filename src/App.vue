@@ -22,7 +22,7 @@ hmsStore.subscribe(onConnection, selectRoomStarted);
         alt="100ms"
       />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-        Kofi Mupati Video Call Meeting
+        KataKata Video Call Consulting
       </h2>
     </div>
     <Conference v-if="isConnected" />
