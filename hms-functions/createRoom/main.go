@@ -19,7 +19,8 @@ import (
 )
 
 type RequestBody struct {
-	Room string `json:"room"`
+	Username string `json:"name"`
+	Room     string `json:"room"`
 }
 
 func generateManagementToken() string {
@@ -64,12 +65,13 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	if err1 != nil {
 		return &events.APIGatewayProxyResponse{
 			StatusCode: http.StatusUnprocessableEntity,
-		}, errors.New("Provide room name in the request body")
+		}, errors.New("Provide name and room in the request body")
 	}
 
 	postBody, _ := json.Marshal(map[string]interface{}{
-		"name":   strings.ToLower(f.Room),
-		"active": true,
+		"name":        strings.ToLower(f.Room),
+		"description": "This is a secret room created by " + f.Username,
+		"active":      true,
 	})
 	payload := bytes.NewBuffer(postBody)
 
